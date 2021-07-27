@@ -1,7 +1,7 @@
 FROM gitpod/workspace-full
 
 ENV FLUTTER_HOME=/home/gitpod/flutter \
-    FLUTTER_VERSION=v1.9.1+hotfix.6-stable
+    FLUTTER_VERSION=2.2.3-stable
 
 # Install dart
 USER root
@@ -18,7 +18,7 @@ USER gitpod
 
 # Install Flutter sdk
 RUN cd /home/gitpod && \
-  wget -qO flutter_sdk.tar.xz https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_${FLUTTER_VERSION}.tar.xz && \
+  wget -qO flutter_sdk.tar.xz https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_${FLUTTER_VERSION}.tar.xz && \
   tar -xvf flutter_sdk.tar.xz && rm flutter_sdk.tar.xz
 
 # Web is available on master channel
