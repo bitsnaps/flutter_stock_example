@@ -10,7 +10,3 @@ tasks:
 ports:
 - port: 8080
   onOpen: open-preview
-vscode:
-  extensions:
-    - Dart-Code.dart-code@3.10.0-beta.2:tUOuxmX97tnVRlRhi8Z1og==
-    - Dart-Code.flutter@3.6.0:bAElIiRvpBSK2AT2+PDj0w==
