@@ -3,7 +3,7 @@ FROM gitpod/workspace-full
 WORKDIR /home/gitpod
 
 RUN git clone https://github.com/flutter/flutter -b stable && \
-    /home/gitpod/flutter/bin/flutter channel dev && \
+    /home/gitpod/flutter/bin/flutter channel stable && \
     /home/gitpod/flutter/bin/flutter upgrade && \
     /home/gitpod/flutter/bin/flutter config --enable-web && \
     /home/gitpod/flutter/bin/flutter --version
