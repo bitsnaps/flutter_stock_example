@@ -10,7 +10,7 @@ tasks:
     source ~/.bashrc
   init: >
     flutter upgrade &&
-    flutter pub upgrade --major-versions &&
+    flutter pub upgrade --force-upgrade &&
     flutter doctor &&
     flutter run -d web-server --no-resident # prebuilds the app
   command: >
