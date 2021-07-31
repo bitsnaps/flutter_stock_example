@@ -2,19 +2,58 @@ name: stocks
 
 environment:
   # The pub client defaults to an <2.0.0 sdk constraint which we need to explicitly overwrite.
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.10.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  http: ^0.13.3
+  isolate: ^2.1.1
+  args: ^1.6.0
+  async: ^2.5.0
+  charcode: 1.3.1
+  collection: ^1.15.0
+  convert: 2.1.1
+  csslib: ^0.16.2
+  dart_style:
+  front_end: ^0.1.28
+  glob: 1.2.0
+  html: ^0.14.0+4
+  http_parser: ^4.0.0
+  js: ^0.6.3
+  kernel: ^0.3.28
+  meta: ^1.3.0
+  node_interop: ^1.2.1
+  package_config: ^1.9.3
+  path: ^1.8.0
+  pedantic: ^1.11.1
+  pub_semver: ^1.4.4
+  source_span: ^1.8.0
+  string_scanner: ^1.1.0
+  term_glyph: ^1.2.0
+  typed_data: 1.3.0
+  vector_math: 2.1.0
+  watcher: ^0.9.7+15
+  yaml: ^2.2.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_driver:
     sdk: flutter
+  archive:
+  boolean_selector: ^2.1.0
+  file: ^6.1.2
+  json_rpc_2: ^2.2.2
+  matcher: 0.12.10
+  quiver: ^3.0.1
+  stack_trace: ^1.10.0
+  stream_channel: ^2.1.0
+  test_api: 0.4.2
+  vm_service_client: ^0.2.6+3
+  web_socket_channel: ^1.2.0
 
 flutter:
   uses-material-design: true
