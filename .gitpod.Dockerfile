@@ -13,17 +13,32 @@ RUN curl -fsSL https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key a
 
 USER gitpod
 
+# Download Flutter
 RUN cd /home/gitpod \
     && wget -qO flutter_sdk.tar.xz https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_${FLUTTER_VERSION}.tar.xz \
-    && tar -xvf flutter_sdk.tar.xz && rm flutter_sdk.tar.xz \
+    && tar -xvf flutter_sdk.tar.xz && rm flutter_sdk.tar.xz
+
+# Download Android Studio
+RUN cd /home/gitpod \
     && wget -qO android_studio.zip https://dl.google.com/dl/android/studio/ide-zips/${ANDROID_VERSION}/android-studio-ide-182.5199772-linux.zip \
-    && unzip android_studio.zip && rm -f android_studio.zip \
+    && unzip android_studio.zip && rm -f android_studio.zip
+
+# Setup Android Command Tools (sdkmanager)
+RUN cd /home/gitpod \
     && wget -qO commandlinetools.zip https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip \
-    && unzip commandlinetools.zip && rm -f commandlinetools.zip \
-    && cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --update
+    && unzip commandlinetools.zip \
+    && yes | cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --licenses \
+    && cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_HOME "build-tools;28.0.3" "platforms;android-28" \
+    && cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_HOME "system-images;android-30;google_apis_playstore;x86" \
+    && cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --install "cmdline-tools;latest" \
+    && rm commandlinetools.zip
 
 # Web is available on master channel
 RUN $FLUTTER_HOME/bin/flutter channel master && $FLUTTER_HOME/bin/flutter upgrade && $FLUTTER_HOME/bin/flutter config --enable-web
+
+# Optional (flutter Accept licenses & DevTools)
+RUN yes | flutter doctor --android-licenses
+RUN flutter pub global activate devtools
 
 # Change the PUB_CACHE to /workspace so dependencies are preserved.
 ENV PUB_CACHE=/workspace/.pub_cache
