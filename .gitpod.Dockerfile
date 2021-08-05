@@ -30,6 +30,7 @@ RUN cd /home/gitpod \
     && unzip commandlinetools.zip \
     && yes | cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --licenses \
     && cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_HOME "build-tools;28.0.3" "platforms;android-28" \
+    && cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_HOME "build-tools;29.0.2" "platforms;android-29" \
     && cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_HOME "system-images;android-30;google_apis_playstore;x86" \
     && cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --install "cmdline-tools;latest" \
     && rm commandlinetools.zip
