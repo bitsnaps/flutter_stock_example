@@ -3,8 +3,7 @@ FROM gitpod/workspace-full-vnc
 ENV ANDROID_HOME=/home/gitpod/android-sdk-linux \
     ANDROID_VERSION=3.3.0.20 \
     FLUTTER_HOME=/home/gitpod/flutter \
-    FLUTTER_VERSION=2.2.3-stable \
-    PATH=/usr/lib/dart/bin:$FLUTTER_HOME/bin:$ANDROID_HOME/tools:$PATH
+    FLUTTER_VERSION=2.2.3-stable
 
 USER root
 
@@ -21,10 +20,19 @@ RUN cd /home/gitpod \
     && unzip android_studio.zip && rm -f android_studio.zip \
     && wget -qO commandlinetools.zip https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip \
     && unzip commandlinetools.zip && rm -f commandlinetools.zip \
-    && ./cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --update
+    && mkdir $ANDROID_SDK/cmdline-tools
+
+# Copy android command line tools to android sdk path
+COPY cmdline-tools $ANDROID_SDK/cmdline-tools
+
+# download android paltform sdk
+RUN $ANDROID_SDK/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --update
 
 # Web is available on master channel
 RUN $FLUTTER_HOME/bin/flutter channel master && $FLUTTER_HOME/bin/flutter upgrade && $FLUTTER_HOME/bin/flutter config --enable-web
 
 # Change the PUB_CACHE to /workspace so dependencies are preserved.
 ENV PUB_CACHE=/workspace/.pub_cache
+
+# add executables to PATH
+RUN echo 'export PATH=${FLUTTER_HOME}/bin:${FLUTTER_HOME}/bin/cache/dart-sdk/bin:${PUB_CACHE}/bin:${FLUTTER_HOME}/.pub-cache/bin:${ANDROID_HOME}/tools:$PATH' >> ~/.bashrc
