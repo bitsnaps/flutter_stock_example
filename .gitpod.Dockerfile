@@ -19,13 +19,8 @@ RUN cd /home/gitpod \
     && wget -qO android_studio.zip https://dl.google.com/dl/android/studio/ide-zips/${ANDROID_VERSION}/android-studio-ide-182.5199772-linux.zip \
     && unzip android_studio.zip && rm -f android_studio.zip \
     && wget -qO commandlinetools.zip https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip \
-    && unzip commandlinetools.zip && rm -f commandlinetools.zip
-
-# Copy android command line tools to android sdk path
-COPY cmdline-tools $ANDROID_HOME
-
-# download android paltform sdk
-RUN $ANDROID_HOME/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --update
+    && unzip commandlinetools.zip && rm -f commandlinetools.zip \
+    && cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --update
 
 # Web is available on master channel
 RUN $FLUTTER_HOME/bin/flutter channel master && $FLUTTER_HOME/bin/flutter upgrade && $FLUTTER_HOME/bin/flutter config --enable-web
