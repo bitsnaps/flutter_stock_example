@@ -1,7 +1,9 @@
 FROM gitpod/workspace-full-vnc
 
 ENV ANDROID_HOME=/home/gitpod/android-sdk-linux \
+    ANDROID_VERSION=3.3.0.20 \
     FLUTTER_HOME=/home/gitpod/flutter \
+    FLUTTER_VERSION=2.2.3-stable \
     PATH=/usr/lib/dart/bin:$FLUTTER_HOME/bin:$ANDROID_HOME/tools:$PATH
 
 USER root
@@ -13,9 +15,16 @@ RUN curl -fsSL https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key a
 USER gitpod
 
 RUN cd /home/gitpod \
-    && wget -qO flutter_sdk.tar.xz https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_v1.0.0-stable.tar.xz \
+    && wget -qO flutter_sdk.tar.xz https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_${FLUTTER_VERSION}.tar.xz \
     && tar -xvf flutter_sdk.tar.xz && rm flutter_sdk.tar.xz \
-    && wget -qO android_studio.zip https://dl.google.com/dl/android/studio/ide-zips/3.3.0.20/android-studio-ide-182.5199772-linux.zip \
+    && wget -qO android_studio.zip https://dl.google.com/dl/android/studio/ide-zips/${ANDROID_VERSION}/android-studio-ide-182.5199772-linux.zip \
     && unzip android_studio.zip && rm -f android_studio.zip \
-    && wget --output-document=android-sdk.tgz --quiet http://dl.google.com/android/android-sdk_r26.1.1-linux.tgz \
-    && tar -xvf android-sdk.tgz && rm android-sdk.tgz
+    && wget -qO commandlinetools.zip https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip \
+    && unzip commandlinetools.zip && rm -f commandlinetools.zip \
+    && tools/bin/sdkmanager --update
+
+# Web is available on master channel
+RUN $FLUTTER_HOME/bin/flutter channel master && $FLUTTER_HOME/bin/flutter upgrade && $FLUTTER_HOME/bin/flutter config --enable-web
+
+# Change the PUB_CACHE to /workspace so dependencies are preserved.
+ENV PUB_CACHE=/workspace/.pub_cache
