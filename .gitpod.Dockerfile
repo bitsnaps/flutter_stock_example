@@ -4,7 +4,8 @@ ENV ANDROID_HOME=/home/gitpod/android-sdk-linux \
     ANDROID_VERSION=3.3.0.20 \
     FLUTTER_HOME=/home/gitpod/flutter \
     FLUTTER_VERSION=2.2.3-stable \
-    PATH=/usr/lib/dart/bin:$FLUTTER_HOME/bin:$ANDROID_HOME/tools:$PATH
+    CMD_TOOLS=cmdline-tools \
+    PATH=/usr/lib/dart/bin:$FLUTTER_HOME/bin:$ANDROID_HOME/tools:CMD_TOOLS/bin:$PATH
 
 USER root
 
@@ -21,7 +22,7 @@ RUN cd /home/gitpod \
     && unzip android_studio.zip && rm -f android_studio.zip \
     && wget -qO commandlinetools.zip https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip \
     && unzip commandlinetools.zip && rm -f commandlinetools.zip \
-    && tools/bin/sdkmanager --update
+    && sdkmanager --sdk_root=$ANDROID_HOME --update
 
 # Web is available on master channel
 RUN $FLUTTER_HOME/bin/flutter channel master && $FLUTTER_HOME/bin/flutter upgrade && $FLUTTER_HOME/bin/flutter config --enable-web
