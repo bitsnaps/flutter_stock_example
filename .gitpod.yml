@@ -23,3 +23,7 @@ tasks:
     flutter run -d web-server --web-port=8080 --web-hostname=0.0.0.0
 #    flutter build apk # build android apk
 #    flutter build appbundle # disable code shrinker
+
+# You can run Android Studio using:
+#/home/gitpod/android-studio/bin/studio.sh
+# then open vnc view

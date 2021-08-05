@@ -7,6 +7,7 @@ ENV ANDROID_HOME=/home/gitpod/android-sdk-linux \
 
 USER root
 
+# Download and install Dart
 RUN curl -fsSL https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
     && curl -fsSL https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list \
     && install-packages build-essential dart libkrb5-dev gcc make gradle android-tools-adb android-tools-fastboot
@@ -37,8 +38,8 @@ RUN cd /home/gitpod \
 RUN $FLUTTER_HOME/bin/flutter channel master && $FLUTTER_HOME/bin/flutter upgrade && $FLUTTER_HOME/bin/flutter config --enable-web
 
 # Optional (flutter Accept licenses & DevTools)
-RUN yes | flutter doctor --android-licenses
-RUN flutter pub global activate devtools
+RUN yes | $FLUTTER_HOME/bin/flutter doctor --android-licenses
+RUN $FLUTTER_HOME/bin/flutter pub global activate devtools
 
 # Change the PUB_CACHE to /workspace so dependencies are preserved.
 ENV PUB_CACHE=/workspace/.pub_cache
