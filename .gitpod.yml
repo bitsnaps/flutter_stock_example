@@ -12,6 +12,8 @@ ports:
   onOpen: ignore
 - port: 5037
   onOpen: ignore
+- port: 9100
+  onOpen: ignore
 
 tasks:
 - before: >
