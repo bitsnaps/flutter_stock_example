@@ -1,12 +1,28 @@
 # Stocks
 
-Demo app for the material design widgets and other features provided by Flutter.
+Demo app for the material design widgets and other features provided by Flutter with full Android SDK installed.
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/from-referrer/)
 
 Clicking the button above will open this repository in Gitpod, a fully-featured dev environment running in your browser.
 
+### Screenshots
+
+Gitpod vscode:
 <img width="1585" alt="Screenshot 2019-10-30 at 16 57 54" src="https://user-images.githubusercontent.com/372735/67875300-71596300-fb36-11e9-85da-dbbd5e322bf6.png">
+
+#### VNC Viewer:
+You can run Android Studio and open Flutter/Android projects over VNC:
+
+Flutter Project
+
+![Screenshot](screenshot.png?raw=true "Flutter Project")
+
+Android Project:
+![Screenshot](screenshot.png?raw=true "Android Project")
+
+### Known issues:
+You can't run any emulator over VNC, read more at [#1273](https://github.com/gitpod-io/gitpod/issues/1273), you can however run the the app on web browser on hot-releading mode, you can also build android apk.
 
 ### Building and installing the stocks demo app
 
