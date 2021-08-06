@@ -2,11 +2,13 @@ image:
   file: .gitpod.Dockerfile
 
 ports:
-- port: 8080
+- port: 8080 # Web preview
   onOpen: open-preview
-- port: 5900
+- port: 6080 # VNC
+  onOpen: open-browser
+- port: 6942
   onOpen: ignore
-- port: 6080
+- port: 5900
   onOpen: ignore
 - port: 5037
   onOpen: ignore

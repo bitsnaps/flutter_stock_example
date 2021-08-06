@@ -46,4 +46,4 @@ RUN $FLUTTER_HOME/bin/flutter pub global activate devtools
 ENV PUB_CACHE=/workspace/.pub_cache
 
 # add executables to PATH
-RUN echo 'export PATH=${FLUTTER_HOME}/bin:${FLUTTER_HOME}/bin/cache/dart-sdk/bin:${PUB_CACHE}/bin:${FLUTTER_HOME}/.pub-cache/bin:${ANDROID_HOME}/tools:$PATH' >> ~/.bashrc
+RUN echo 'export PATH=${FLUTTER_HOME}/bin:${FLUTTER_HOME}/bin/cache/dart-sdk/bin:${PUB_CACHE}/bin:${FLUTTER_HOME}/.pub-cache/bin:$HOME/flutter/.pub-cache/bin:${ANDROID_HOME}/tools:$PATH' >> ~/.bashrc
