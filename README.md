@@ -19,7 +19,7 @@ Flutter Project
 ![Screenshot](screenshot.png?raw=true "Flutter Project")
 
 Android Project:
-![Screenshot](screenshot.png?raw=true "Android Project")
+![Screenshot](screenshot2.png?raw=true "Android Project")
 
 ### Known issues:
 You can't run any emulator over VNC, read more at [#1273](https://github.com/gitpod-io/gitpod/issues/1273), you can however run the the app on web browser on hot-releading mode, you can also build android apk.
